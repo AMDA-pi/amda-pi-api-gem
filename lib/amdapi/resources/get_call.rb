@@ -10,7 +10,10 @@ module Amdapi
     end
 
     def find
-      Call.new JSON.parse(get_request(call_uuid, headers: headers).body)["data"]
+      response = get_request(call_uuid, headers: headers)
+      return nil if response.status == 404
+
+      Call.new JSON.parse(response.body)["data"]
     end
 
     def all(params = {})

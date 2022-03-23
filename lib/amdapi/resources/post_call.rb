@@ -11,8 +11,11 @@ module Amdapi
     end
 
     def create
-      url = JSON.parse(post_call_request(params, headers: call_headers).body)["data"]["url"]
-      post_audio_request(url, file, headers: audio_headers)
+      response = JSON.parse(post_call_request(params, headers: call_headers).body)
+      call_url = response["data"]["url"]
+      call_uuid = response["data"]["call_uuid"]
+      post_audio_request(call_url, file, headers: audio_headers)
+      Call.new call_uuid: call_uuid
     end
 
     private

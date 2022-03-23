@@ -5,6 +5,8 @@ require_relative "amdapi/version"
 module Amdapi
   autoload :Client, "amdapi/client"
   autoload :Error, "amdapi/error"
+  autoload :TokenError, "amdapi/error"
+  autoload :ParamsError, "amdapi/error"
 
   autoload :Collection, "amdapi/collection"
   autoload :Object, "amdapi/object"
@@ -13,4 +15,5 @@ module Amdapi
   autoload :GetCall, "amdapi/resources/get_call"
   autoload :PostCall, "amdapi/resources/post_call"
   autoload :DeleteCall, "amdapi/resources/delete_call"
+  autoload :ParamsValidator, "amdapi/validation"
 end
