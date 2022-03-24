@@ -4,10 +4,10 @@ module Amdapi
   class Resource
     BASE_URL = "https://api-amdapi.com"
 
-    def initialize(token, adapter: Faraday.default_adapter, stub: nil)
+    def initialize(token, adapter: Faraday.default_adapter, stubs: nil)
       @token = token
       @adapter = adapter
-      @stub = stub
+      @stubs = stubs
     end
 
     def get_request(call_uuid = nil, params: {}, headers: {})
@@ -33,7 +33,7 @@ module Amdapi
     def connection
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = BASE_URL
-        conn.adapter adapter, @stub
+        conn.adapter adapter, @stubs
       end
     end
 

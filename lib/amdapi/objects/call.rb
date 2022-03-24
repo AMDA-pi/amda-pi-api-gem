@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Amdapi
   class Call < Object
     attr_reader :call_uuid

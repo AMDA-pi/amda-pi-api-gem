@@ -4,9 +4,9 @@ module Amdapi
   class GetCall < Resource
     attr_reader :call_uuid
 
-    def initialize(call_uuid = "", token)
+    def initialize(call_uuid = "", token, adapter, stubs)
       @call_uuid = call_uuid
-      super(token)
+      super(token, adapter: adapter, stubs: stubs)
     end
 
     def find

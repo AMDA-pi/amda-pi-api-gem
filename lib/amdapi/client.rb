@@ -10,11 +10,11 @@ module Amdapi
     BASE_URL = "https://auth.api-amdapi.com"
     attr_reader :client_id, :client_secret, :token, :adapter
 
-    def initialize(client_id:, client_secret:, adapter: Faraday.default_adapter, stub: nil)
+    def initialize(client_id:, client_secret:, adapter: Faraday.default_adapter, stubs: nil)
       @client_id = client_id
       @client_secret = client_secret
       @adapter = adapter
-      @stub = stub
+      @stubs = stubs
       @token = generate_token
     end
 
@@ -27,7 +27,7 @@ module Amdapi
     end
 
     def find(call_uuid)
-      GetCall.new(call_uuid, token).find
+      GetCall.new(call_uuid, token, adapter, @stubs).find
     end
 
     def all(params: {})
@@ -60,7 +60,7 @@ module Amdapi
     def connection
       @connection ||= Faraday.new do |conn|
         conn.url_prefix = BASE_URL
-        conn.adapter adapter, @stub
+        conn.adapter adapter, @stubs
       end
     end
 
