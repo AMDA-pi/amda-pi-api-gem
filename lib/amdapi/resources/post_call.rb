@@ -2,7 +2,7 @@
 
 module Amdapi
   class PostCall < Resource
-    attr_reader :params, :file
+    attr_reader :params, :file, :token
 
     def initialize(token, params, file)
       super(token)
@@ -15,7 +15,7 @@ module Amdapi
       call_url = response["data"]["url"]
       call_uuid = response["data"]["call_uuid"]
       post_audio_request(call_url, file, headers: audio_headers)
-      Call.new call_uuid: call_uuid
+      Call.new call_uuid: call_uuid, token: token
     end
 
     private

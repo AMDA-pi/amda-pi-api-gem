@@ -13,7 +13,8 @@ module Amdapi
       response = get_request(call_uuid, headers: headers)
       return nil if response.status == 404
 
-      Call.new JSON.parse(response.body)["data"]
+      data = JSON.parse(response.body)["data"]
+      Call.new data, call_uuid: data["call_uuid"], token: token
     end
 
     def all(params = {})

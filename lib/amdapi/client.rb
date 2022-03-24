@@ -34,7 +34,7 @@ module Amdapi
       GetCall.new(token).all(params)
     end
 
-    def create(params:, file:)
+    def analize(params:, file:)
       raise ParamsError unless ParamsValidator.new(params).valid?
 
       PostCall.new(token, params, file).create

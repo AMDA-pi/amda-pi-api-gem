@@ -10,7 +10,10 @@ module Amdapi
     end
 
     def delete
-      JSON.parse(delete_call(call_uuid, headers: headers).body)
+      response = delete_call(call_uuid, headers: headers)
+      raise CallNotFoundError if response.status == 404
+
+      JSON.parse(response.body)
     end
 
     private

@@ -7,6 +7,7 @@ module Amdapi
   autoload :Error, "amdapi/error"
   autoload :TokenError, "amdapi/error"
   autoload :ParamsError, "amdapi/error"
+  autoload :CallNotFoundError, "amdapi/error"
 
   autoload :Collection, "amdapi/collection"
   autoload :Object, "amdapi/object"

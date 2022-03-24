@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-require "faraday"
-require "pry"
 
 RSpec.describe Amdapi do
   it "has a version number" do
