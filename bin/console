@@ -3,6 +3,7 @@
 
 require "bundler/setup"
 require "amdapi"
+require "dotenv/load"
 
 # You can add fixtures and/or initialization code here to make experimenting
 # with your gem easier. You can also use a different console, if you like.
@@ -11,7 +12,6 @@ require "amdapi"
 # require "pry"
 # Pry.start
 
-# client = Amdapi::Client.new(client_id: "", client_secret: "")
-
+client = Amdapi::Client.new(client_id: ENV["client_id"], client_secret: ENV["client_secret"])
 require "irb"
 IRB.start(__FILE__)

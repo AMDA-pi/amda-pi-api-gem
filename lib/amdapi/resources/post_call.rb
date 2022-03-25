@@ -2,17 +2,20 @@
 
 module Amdapi
   class PostCall < Resource
-    attr_reader :params, :file
+    attr_reader :params, :file, :token
 
-    def initialize(token, params, file)
-      super(token)
+    def initialize(token, params, file, adapter, stubs)
+      super(token, adapter: adapter, stubs: stubs)
       @params = params
       @file = file
     end
 
     def create
-      url = JSON.parse(post_call_request(params, headers: call_headers).body)["data"]["url"]
-      post_audio_request(url, file, headers: audio_headers)
+      response = JSON.parse(post_call_request(params, headers: call_headers).body)
+      call_url = response["data"]["url"]
+      call_uuid = response["data"]["call_uuid"]
+      post_audio_request(call_url, file, headers: audio_headers)
+      Call.new call_uuid: call_uuid, token: token
     end
 
     private
