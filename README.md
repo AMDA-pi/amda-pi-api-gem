@@ -23,18 +23,28 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+# initialize the Amdapi client
 client = Amdapi::Client.new(client_id: ENV["client_id"], client_secret: ENV["client_secret"])
+
+# GET one call
 client.find(call_uuid)
-client.all(params)
-client.create(audio_url)
-client.destroy(client_uuid)
+
+# GET a batch of calls
+client.all(params: search_params)
+
+# Analize a call (create the call info in our DB + analyse asyncronously the audio)
+client.analize(params: call_params, file: audio_file)
+
+# Delete a specific audio (this includes delete the call in our Database + the audio)
+client.delete(call_uuid)
 ```
 
 ## Development
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. For security purposes the stubs for the tests are in the gitignore file.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and the created tag, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+If you whish to start using this gem do not hesitate to contact the AMDApi team to provide you with the correct credentials.
 
 ## Contributing
 
