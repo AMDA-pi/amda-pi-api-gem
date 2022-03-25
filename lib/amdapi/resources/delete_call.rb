@@ -4,8 +4,8 @@ module Amdapi
   class DeleteCall < Resource
     attr_reader :call_uuid
 
-    def initialize(token, call_uuid)
-      super(token)
+    def initialize(token, call_uuid, adapter, stubs)
+      super(token, adapter: adapter, stubs: stubs)
       @call_uuid = call_uuid
     end
 

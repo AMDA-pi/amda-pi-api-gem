@@ -10,8 +10,8 @@ module Amdapi
       @token = token
     end
 
-    def refetch
-      response = GetCall.new(call_uuid, @token).find
+    def refetch(adapter: Faraday.default_adapter, stubs: nil)
+      response = GetCall.new(call_uuid, @token, adapter, stubs).find
       @attributes = OpenStruct.new(response)
       true
     end

@@ -4,8 +4,8 @@ module Amdapi
   class PostCall < Resource
     attr_reader :params, :file, :token
 
-    def initialize(token, params, file)
-      super(token)
+    def initialize(token, params, file, adapter, stubs)
+      super(token, adapter: adapter, stubs: stubs)
       @params = params
       @file = file
     end

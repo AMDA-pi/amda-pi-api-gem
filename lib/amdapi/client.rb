@@ -31,17 +31,17 @@ module Amdapi
     end
 
     def all(params: {})
-      GetCall.new(token).all(params)
+      GetCall.new(token, adapter, @stubs).all(params)
     end
 
     def analize(params:, file:)
       raise ParamsError unless ParamsValidator.new(params).valid?
 
-      PostCall.new(token, params, file).create
+      PostCall.new(token, params, file, adapter, @stubs).create
     end
 
     def delete(call_uuid)
-      DeleteCall.new(token, call_uuid).delete
+      DeleteCall.new(token, call_uuid, adapter, @stubs).delete
     end
 
     private

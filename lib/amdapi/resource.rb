@@ -14,6 +14,10 @@ module Amdapi
       connection.get("v1/calls/#{call_uuid}", params, default_headers.merge(headers))
     end
 
+    def get_all_request(params: {}, headers: {})
+      connection.get("v1/calls", params, default_headers.merge(headers))
+    end
+
     def post_call_request(params, headers: {})
       connection.post("amda-pi-storage", params.to_json, default_headers.merge(headers))
     end
