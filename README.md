@@ -91,21 +91,7 @@ The file can be sent the following way. Needs to be a .wav format
 ```ruby
     file = File.read('[path to the audio file]')
 ```
-<<<<<<< HEAD
-=======
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. For security purposes the stubs for the tests are in the gitignore file.
-
-You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-If you whish to start using this gem do not hesitate to contact the AMDApi team to provide you with the correct credentials.
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/amdapi.
-
->>>>>>> b8cde1745494da533afd9edb675def9f3693b310
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
