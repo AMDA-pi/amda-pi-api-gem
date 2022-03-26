@@ -91,6 +91,8 @@ The file can be sent the following way. Needs to be a .wav format
 ```ruby
     file = File.read('[path to the audio file]')
 ```
+<<<<<<< HEAD
+=======
 
 ## Development
 
@@ -103,6 +105,7 @@ If you whish to start using this gem do not hesitate to contact the AMDApi team 
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/amdapi.
 
+>>>>>>> b8cde1745494da533afd9edb675def9f3693b310
 ## License
 
 The gem is available as open source under the terms of the [MIT License](https://opensource.org/licenses/MIT).
