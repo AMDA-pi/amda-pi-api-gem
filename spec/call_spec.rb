@@ -13,9 +13,9 @@ RSpec.describe Amdapi do
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
     call = client.find("123456789")
     expect(call.call_uuid).to eq("123456789")
-    expect(call.call_info.audio_duration).to eq(44.16)
-    expect(call.call_info.total_speakers).to eq(2)
-    expect(call.call_info.speakers_stats.agent.total_duration).to eq(16.119999999999994)
+    expect(call.call_info["audio_duration"]).to eq(44.16)
+    expect(call.call_info["total_speakers"]).to eq(2)
+    expect(call.call_info["speakers_stats"]["agent"]["total_duration"]).to eq(16.119999999999994)
   end
 
   it "should return an error if trying to get non existing call" do
@@ -49,8 +49,7 @@ RSpec.describe Amdapi do
 
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
     response = client.delete("123456789")
-    expect(response["success"]).to eq(true)
-    expect(response["message"]).to eq("call 123456789 deleted_sucessfully")
+    expect(response).to eq(true)
   end
 
   it "should return an error if trying to delete non existing call" do
@@ -71,7 +70,7 @@ RSpec.describe Amdapi do
     end
 
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
-    call = client.analize(params: call_create_stup, file: "a fancy file")
+    call = client.analyze(params: call_create_stup, file: "a fancy file")
     expect(call.call_uuid).to eq(JSON.parse(call_post_stup)["data"]["call_uuid"])
   end
 
@@ -81,29 +80,7 @@ RSpec.describe Amdapi do
     end
 
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
-    expect { client.analize(params: { foo: "bar" }, file: "a fancy file") }.to raise_error(Amdapi::ParamsError)
-  end
-
-  it 'should be possible to refetch the call after its creation' do
-    call_uuid = JSON.parse(call_post_stup)["data"]["call_uuid"]
-    stub = Faraday::Adapter::Test::Stubs.new do |st|
-      st.post("/oauth2/token") { [200, {}, { access_token: "blabla" }.to_json] }
-      st.post("/amda-pi-storage") { [200, {}, call_post_stup] }
-      st.put("https://fancy_url.com") { [200, {}, {}] }
-      st.get("/v1/calls/#{call_uuid}") { [200, {}, call_get_stub] }
-    end
-
-    client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
-    call = client.analize(params: call_create_stup, file: "a fancy file")
-    expect(call.call_uuid).to eq(call_uuid)
-    expect(call.call_info&.audio_duration).to eq(nil)
-    expect(call.call_info&.total_speakers).to eq(nil)
-    expect(call.call_info&.speakers_stats&.agent&.total_duration).to eq(nil)
-    call.refetch(adapter: :test, stubs: stub)
-    expect(call.call_uuid).to eq(call_uuid)
-    expect(call.call_info.audio_duration).to eq(44.16)
-    expect(call.call_info.total_speakers).to eq(2)
-    expect(call.call_info.speakers_stats.agent.total_duration).to eq(16.119999999999994)
+    expect { client.analyze(params: { foo: "bar" }, file: "a fancy file") }.to raise_error(Amdapi::ParamsError)
   end
 
   def call_get_stub

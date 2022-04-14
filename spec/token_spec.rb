@@ -10,7 +10,7 @@ RSpec.describe Amdapi do
     end
 
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
-    expect(client.token).to eq("blabla")
+    expect(client.compare_token("blabla")).to eq(true)
   end
 
   it "should throw an error if given the wrong credentials" do

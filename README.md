@@ -35,8 +35,8 @@ client.find(call_uuid)
 client.all(params: search_params_hash) # based on the filters you have provided
 client.all # will get the first page of the calls linked to your entreprise
 
-## Analize a call (create the call info in our DB + analyse asynchronously the audio)
-client.analize(params: call_params_hash, file: audio_file)
+## Analyze a call (create the call info in our DB + analyse asyncronously the audio)
+client.analyze(params: call_params_hash, file: audio_file)
 
 ## Delete a specific audio (this includes delete the call in our Database + the audio)
 client.delete(call_uuid)
