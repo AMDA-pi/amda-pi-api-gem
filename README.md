@@ -23,6 +23,8 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
+require 'amdapi'
+
 ## initialize the Amdapi client
 client = Amdapi::Client.new(client_id: ENV["client_id"], client_secret: ENV["client_secret"])
 
