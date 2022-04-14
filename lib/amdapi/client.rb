@@ -8,7 +8,7 @@ require "json"
 module Amdapi
   class Client
     BASE_URL = "https://auth.api-amdapi.com"
-    attr_reader :client_id, :client_secret, :token, :adapter
+    attr_reader :client_id, :client_secret, :adapter
 
     def initialize(client_id:, client_secret:, adapter: Faraday.default_adapter, stubs: nil)
       @client_id = client_id
@@ -26,6 +26,10 @@ module Amdapi
       "#<Amdapi::Client>"
     end
 
+    def compare_token(new_token)
+      new_token == token
+    end
+
     def find(call_uuid)
       GetCall.new(call_uuid, token, adapter, @stubs).find
     end
@@ -34,7 +38,7 @@ module Amdapi
       GetCall.new(token, adapter, @stubs).all(params)
     end
 
-    def analize(params:, file:)
+    def analyze(params:, file:)
       raise ParamsError unless ParamsValidator.new(params).valid?
 
       PostCall.new(token, params, file, adapter, @stubs).create
@@ -45,6 +49,8 @@ module Amdapi
     end
 
     private
+
+    attr_reader :token
 
     def generate_token
       response = connection.post("/oauth2/token") do |req|
