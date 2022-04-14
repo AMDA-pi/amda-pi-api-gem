@@ -13,7 +13,7 @@ module Amdapi
       response = delete_call(call_uuid, headers: headers)
       raise CallNotFoundError if response.status == 404
 
-      JSON.parse(response.body)
+      JSON.parse(response.body)["success"]
     end
 
     private

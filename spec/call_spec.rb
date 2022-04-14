@@ -49,8 +49,7 @@ RSpec.describe Amdapi do
 
     client = Amdapi::Client.new(client_id: "test", client_secret: "test", adapter: :test, stubs: stub)
     response = client.delete("123456789")
-    expect(response["success"]).to eq(true)
-    expect(response["message"]).to eq("call 123456789 deleted_sucessfully")
+    expect(response).to eq(true)
   end
 
   it "should return an error if trying to delete non existing call" do
