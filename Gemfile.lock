@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    amdapi (0.1.0)
+    amdapi (0.1.1)
       faraday
       faraday_middleware
 
@@ -89,4 +89,4 @@ DEPENDENCIES
   rubocop (~> 0.80)
 
 BUNDLED WITH
-   2.2.3
+   2.3.10
