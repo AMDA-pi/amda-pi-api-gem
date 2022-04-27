@@ -1,9 +1,5 @@
 # Amdapi
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/amdapi`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -63,7 +59,6 @@ client.delete(call_uuid)
 ### Call params
 | key | description | format |
 | --- | ----------- | ------ |
-| **company_name** | The name of your company | string |
 | **call_id** | The ID of the call from your DB | string |
 | **client_id** | The ID of your client. The one that operates the contact center | integer |
 | **agent_id** | The ID of the agent that operates the call. Value from your DB | integer |
@@ -75,7 +70,6 @@ client.delete(call_uuid)
 
 ```JSON
 {
-	"company_name": "your_company_name",
 	"call_id": 273,
 	"client_id": 412,
 	"agent_id": 42,
